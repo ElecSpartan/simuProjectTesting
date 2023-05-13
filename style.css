@@ -6,7 +6,10 @@
 -fx-border-color: red;
 }
 
-#line_and_tri{
+Polyline{
 -fx-stroke : red;
--fx-fill:red
+}
+Polygon{
+
+
 }
