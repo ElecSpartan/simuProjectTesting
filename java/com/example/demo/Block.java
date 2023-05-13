@@ -9,7 +9,7 @@ public class Block {
     int inputsNum;
     int outputsNum;
 
-    public Block(int ID, String name, double right, double left, double up, double down, int inputsNum, int outputsNum) {
+    public Block(int ID, String name, double right, double up, double left, double down, int inputsNum, int outputsNum) {
         this.ID = ID;
         this.name = name;
         this.right = right;
