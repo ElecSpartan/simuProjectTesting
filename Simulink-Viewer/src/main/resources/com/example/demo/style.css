@@ -1,0 +1,16 @@
+.root{
+-fx-background-color : #ADD8E6;
+}
+
+.label {
+-fx-border-color: red;
+}
+
+
+Polyline{
+-fx-stroke : red;
+}
+Polygon{
+
+
+}
