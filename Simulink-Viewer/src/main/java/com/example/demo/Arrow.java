@@ -1,11 +1,12 @@
 package com.example.demo;
 import javafx.scene.shape.Polygon;
 
+import java.util.ArrayList;
 import java.util.List;
 public class Arrow {
     int scrId;
     int srcPlace;
-    List<Pair> dests;
+    List<Pair> dests = new ArrayList<Pair>();
 }
 class Pair {
     int destId;

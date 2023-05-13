@@ -3,6 +3,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Polyline;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,7 +31,17 @@ public class Main extends Application {
     }
 
     public static void mdlParsing() {
-
+        //  for experiment (blocks only)
+        Block one = new Block(5, "Constant", 780, 200, 810, 230, 1, 1);
+        blocks.add(one);
+        Block two = new Block(1, "Saturation", 935, 200, 965, 230, 1, 1);
+        blocks.add(two);
+        Block three = new Block(3, "ADD", 1040, 209, 1070, 241, 3, 1);
+        blocks.add(three);
+        Block four = new Block(7, "Scope", 1130, 209, 1160, 241, 1, 0);
+        blocks.add(four);
+        Block five = new Block(4, "Unit delay", 1040, 283, 1075, 317, 1, 1);
+        blocks.add(five);
     }
 
     public static void drawBlocks() {
@@ -42,19 +54,19 @@ public class Main extends Application {
 
             // for the container
             Label container = new Label();
-            container.setId("container");
+            container.setId("LabelShape");
             container.setLayoutX(left);
             container.setLayoutY(up);
             container.setMinSize(width, height);
-
             // for the name
             Label name = new Label(b.getName());
-            name.setId("name");
-            name.setLayoutX(left);
-            name.setLayoutY(down + 10);   // 10 (trial and error)
-            name.setMinSize(width, height);
-
+            name.setMinWidth(1500);
+            name.setId("LabelName");
             root.getChildren().addAll(container, name);
+            System.out.println(left + "  " + width/2 + "  " + name.getMinWidth()/2.0);
+            name.setLayoutX((left + width/2.0) - (name.getMinWidth()/2.0) );
+            name.setLayoutY(down);   // 10 (trial and error)
+
         }
     }
     public static void drawArrows() {

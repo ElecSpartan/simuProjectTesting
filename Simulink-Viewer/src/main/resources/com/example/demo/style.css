@@ -1,16 +1,22 @@
 .root{
--fx-background-color : #ADD8E6;
+    -fx-background-color : lightgrey;
 }
 
-.label {
--fx-border-color: red;
+.label{
+    -fx-font-weight: bold;
+}
+#LabelShape{
+    -fx-border-color: blue;
+    -fx-border-width: 2px;
+    -fx-background-color:white
 }
 
+#LabelName{
+    -fx-font-size:10;
+    -fx-alignment: center;
+}
 
 Polyline{
--fx-stroke : red;
-}
-Polygon{
-
-
+    -fx-stroke: blue;
+    -fx-stroke-width: 2px;
 }
