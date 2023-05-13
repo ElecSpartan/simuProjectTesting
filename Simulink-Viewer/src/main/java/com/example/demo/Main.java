@@ -29,7 +29,6 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
     public static void mdlParsing() {
         //  for experiment (blocks only)
         Block one = new Block(5, "Constant", 780, 200, 810, 230, 1, 1);
