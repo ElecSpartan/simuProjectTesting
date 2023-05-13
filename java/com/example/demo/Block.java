@@ -9,7 +9,7 @@ public class Block {
     int inputsNum;
     int outputsNum;
 
-    public Block(int ID, String name, double right, double left, double up, double down, int inputsNum, int outputsNum) {
+    public Block(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum) {
         this.ID = ID;
         this.name = name;
         this.right = right;
@@ -18,5 +18,42 @@ public class Block {
         this.down = down;
         this.inputsNum = inputsNum;
         this.outputsNum = outputsNum;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getLeft() {
+        return left;
+    }
+
+    public double getUp() {
+        return up;
+    }
+
+    public double getDown() {
+        return down;
+    }
+
+    public double getWidth()
+    {
+        return (right - left);
+    }
+
+    public double getHeight()
+    {
+        return (down - up);
+    }
+    public int getInputsNum() {
+        return inputsNum;
+    }
+
+    public int getOutputsNum() {
+        return outputsNum;
     }
 }

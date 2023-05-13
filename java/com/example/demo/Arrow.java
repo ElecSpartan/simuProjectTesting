@@ -1,12 +1,12 @@
 package com.example.demo;
+import javafx.scene.shape.Polygon;
+
 import java.util.List;
 public class Arrow {
     int scrId;
     int srcPlace;
     List<Pair> dests;
 }
-
-
 class Pair {
     int destId;
     int destPlace;
@@ -25,3 +25,4 @@ class Pair {
     }
 
 }
+
