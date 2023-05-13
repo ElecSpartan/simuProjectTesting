@@ -1,0 +1,12 @@
+.root{
+-fx-background-color : #ADD8E6;
+}
+
+.label {
+-fx-border-color: red;
+}
+
+#line_and_tri{
+-fx-stroke : red;
+-fx-fill:red
+}
