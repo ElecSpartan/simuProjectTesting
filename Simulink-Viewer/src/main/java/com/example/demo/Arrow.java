@@ -1,7 +1,4 @@
 package com.example.demo;
-
-import javafx.util.Pair;
-
 import java.util.ArrayList;
 import java.util.List;
 public class Arrow {
