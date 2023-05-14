@@ -85,8 +85,7 @@ public class Main extends Application {
         addArrows();
     }
 
-    public static void addBlocks( Element rootElement , Document doc)
-    {
+    public static void addBlocks(Element rootElement, Document doc) {
         if (rootElement.getTagName().equals("System")) {
             NodeList blockList = doc.getElementsByTagName("Block");
             for (int i = 0; i < blockList.getLength(); i++) {
@@ -128,7 +127,7 @@ public class Main extends Application {
                         }
                     }
 
-                    for(int j = 0;j<blockElement.getElementsByTagName("P").getLength();j++) {
+                    for (int j = 0; j < blockElement.getElementsByTagName("P").getLength(); j++) {
                         if (blockElement.getElementsByTagName("P").item(j).getAttributes().item(0).getTextContent().equals("BlockMirror")) {
                             if (blockElement.getElementsByTagName("P").item(j).getTextContent().equals("on"))
                                 blockMirror = true;
@@ -142,8 +141,7 @@ public class Main extends Application {
         }
     }
 
-    public static void addArrows()
-    {
+    public static void addArrows() {
         Arrow a1 = new Arrow(5, 1, 0);
         a1.addDest(1, 0);
         connections.add(a1);
@@ -151,15 +149,16 @@ public class Main extends Application {
         a2.addDest(3, 0);
         a2.addDest(3, 10);
         connections.add(a2);
-        Arrow a3 = new Arrow(3,1,40);
-        a3.addDest(4,75);
-        a3.addDest(7,0);
+        Arrow a3 = new Arrow(3, 1, 40);
+        a3.addDest(4, 75);
+        a3.addDest(7, 0);
         connections.add(a3);
-        Arrow a4 = new Arrow(4,1,-8);
-        a4.addDest(3,-65);
+        Arrow a4 = new Arrow(4, 1, -8);
+        a4.addDest(3, -65);
         connections.add(a4);
 
     }
+
     public static void drawBlocks() {
         for (Block b : blocks) {
             double width = b.getWidth();
@@ -241,6 +240,7 @@ public class Main extends Application {
 
         }
     }
+
     public static Block getBlock(int id) {
         for (Block b : blocks) {
             if (b.getID() == id)
