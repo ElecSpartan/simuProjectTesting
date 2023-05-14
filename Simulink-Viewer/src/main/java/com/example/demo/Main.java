@@ -7,10 +7,18 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
-
-import java.io.IOException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main extends Application {
     static private List<Block> blocks = new ArrayList<Block>(); // for the blocks
@@ -18,7 +26,7 @@ public class Main extends Application {
     static private Pane root = new Pane();
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, ParserConfigurationException, SAXException {
         Scene scene = new Scene(root, 1500, 790);
         stage.setTitle("Simulink viewer");
 
@@ -31,21 +39,111 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void mdlParsing() {
-         //  code for experiment only
-        // place the real code for parsing here
+    public static void mdlParsing() throws IOException, ParserConfigurationException, SAXException {
 
-        Block one = new Block(5, "Constant", 780, 200, 810, 230, 1, 1, false);
-        blocks.add(one);
-        Block two = new Block(1, "Saturation", 935, 200, 965, 230, 1, 1, false);
-        blocks.add(two);
-        Block three = new Block(3, "ADD", 1040, 209, 1070, 241, 3, 1, false);
-        blocks.add(three);
-        Block four = new Block(7, "Scope", 1130, 209, 1160, 241, 1, 0, false);
-        blocks.add(four);
-        Block five = new Block(4, "Unit delay", 1040, 283, 1075, 317, 1, 1, true);
-        blocks.add(five);
+        // taked the needed part only from the mdl file
+        File file = new File("Example.mdl");
+        FileInputStream input = new FileInputStream(file);
+        StringBuilder mdlFile = new StringBuilder();
+        int x;
+        while ((x = input.read()) != -1) {
+            mdlFile.append((char) x);
+        }
+        String mdlFileS = mdlFile.toString();
+        Scanner scanner = new Scanner(mdlFileS);
+        StringBuilder a = new StringBuilder();
+        String before = "-1";
+        boolean now = false;
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            if (line.equals("<System>")) {
+                now = true;
+            } else if (line.equals("</System>")) {
+                a.append(before + '\n');
+                a.append(line);
+                break;
+            }
+            if (now)
+                a.append(before + '\n');
+            before = line;
+        }
+        String newMdlFile = a.toString();
+        String outputFileName = "neededFile.mdl";
+        FileOutputStream outputStream = new FileOutputStream(outputFileName);
+        outputStream.write(newMdlFile.getBytes());
 
+
+        file = new File("neededFile.mdl");
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(file);
+        Element rootElement = doc.getDocumentElement();
+        doc.getDocumentElement().normalize();
+
+
+        addBlocks(rootElement, doc);
+        addArrows();
+    }
+
+    public static void addBlocks( Element rootElement , Document doc)
+    {
+        if (rootElement.getTagName().equals("System")) {
+            NodeList blockList = doc.getElementsByTagName("Block");
+            for (int i = 0; i < blockList.getLength(); i++) {
+                boolean inputs_ports_position_flag = false; // will be used to check if the block had a input ports number or not
+                boolean blockMirror = false; // will be used to check if the block input and output will be mirrored or not
+                Node blockNode = blockList.item(i);
+                NodeList childNodes = blockNode.getChildNodes();
+                if (blockNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element blockElement = (Element) blockNode;
+
+                    //Extracting the information from the block tag
+                    String Name = blockElement.getAttribute("Name");
+                    int ID = (Integer.parseInt(blockElement.getAttribute("SID")));
+
+                    //this part parse the position string to extract the 4 coordinates of the block and handles weather it's on index 0 or index 1
+                    String Position = blockElement.getElementsByTagName("P").item(0).getTextContent();
+                    Position = Position.replace("[", "").replace("]", ""); // Remove square brackets
+                    if (Position.length() <= 5) {
+                        inputs_ports_position_flag = true;
+                        Position = blockElement.getElementsByTagName("P").item(1).getTextContent();
+                        Position = Position.replace("[", "").replace("]", ""); // Remove square brackets
+                    }
+                    String[] strValues = Position.split(","); // Split by comma
+                    double left = Double.parseDouble(strValues[0]);
+                    double up = Double.parseDouble(strValues[1]);
+                    double right = Double.parseDouble(strValues[2]);
+                    double down = Double.parseDouble(strValues[3]);
+
+                    // this part extract the number of input and output ports and the flag is used to
+                    int NumInputPorts = 1, NumOutputPorts = 1;
+                    if (inputs_ports_position_flag) {
+                        String ports = blockElement.getElementsByTagName("P").item(0).getTextContent();
+                        if (ports.length() == 6) {
+                            NumInputPorts = ports.charAt(1) - '0';
+                            NumOutputPorts = ports.charAt(4) - '0';
+                        } else if (ports.length() == 3) {
+                            NumInputPorts = ports.charAt(1) - '0';
+                            NumOutputPorts = 0;
+                        }
+                    }
+
+                    for(int j = 0;j<blockElement.getElementsByTagName("P").getLength();j++) {
+                        if (blockElement.getElementsByTagName("P").item(j).getAttributes().item(0).getTextContent().equals("BlockMirror")) {
+                            if (blockElement.getElementsByTagName("P").item(j).getTextContent().equals("on"))
+                                blockMirror = true;
+                        }
+                    }
+
+                    Block b = new Block(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+                    blocks.add(b);
+                }
+            }
+        }
+    }
+
+    public static void addArrows()
+    {
         Arrow a1 = new Arrow(5, 1, 0);
         a1.addDest(1, 0);
         connections.add(a1);
@@ -60,8 +158,8 @@ public class Main extends Application {
         Arrow a4 = new Arrow(4,1,-8);
         a4.addDest(3,-65);
         connections.add(a4);
-    }
 
+    }
     public static void drawBlocks() {
         for (Block b : blocks) {
             double width = b.getWidth();
