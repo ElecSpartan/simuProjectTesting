@@ -32,7 +32,7 @@ public class Main extends Application {
 
         mdlParsing();
         drawBlocks();
-        drawArrows();
+        //drawArrows();
 
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         stage.setScene(scene);
@@ -42,7 +42,7 @@ public class Main extends Application {
     public static void mdlParsing() throws IOException, ParserConfigurationException, SAXException {
 
         // taked the needed part only from the mdl file
-        File file = new File("Example.mdl");
+        File file = new File("exam1.mdl");
         FileInputStream input = new FileInputStream(file);
         StringBuilder mdlFile = new StringBuilder();
         int x;
