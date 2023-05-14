@@ -6,10 +6,14 @@ public class Block {
     private double left;
     private double up;
     private double down;
-    int inputsNum;
-    int outputsNum;
+    private boolean mirror;
+    private int inputsNum;
+    private int outputsNum;
 
-    public Block(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum) {
+    public Block() {
+
+    }
+    public Block(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror) {
         this.ID = ID;
         this.name = name;
         this.right = right;
@@ -18,6 +22,7 @@ public class Block {
         this.down = down;
         this.inputsNum = inputsNum;
         this.outputsNum = outputsNum;
+        this.mirror = mirror;
     }
 
     public int getID() {
@@ -40,20 +45,27 @@ public class Block {
         return down;
     }
 
-    public double getWidth()
-    {
+    public double getWidth() {
         return (right - left);
     }
 
-    public double getHeight()
-    {
+    public double getHeight() {
         return (down - up);
     }
+
     public int getInputsNum() {
         return inputsNum;
     }
 
     public int getOutputsNum() {
         return outputsNum;
+    }
+
+    public double getRight() {
+        return right;
+    }
+
+    public boolean isMirror() {
+        return mirror;
     }
 }

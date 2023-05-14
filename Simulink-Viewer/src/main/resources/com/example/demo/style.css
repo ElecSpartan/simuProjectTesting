@@ -16,11 +16,16 @@
     -fx-alignment: center;
 }
 
-Polyline{
-    -fx-stroke: blue;
+Line{
+    -fx-stroke: red;
     -fx-stroke-width: 2px;
 }
 
 Polygon{
+-fx-fill:red;
+}
 
+Circle{
+ -fx-fill:BLACK;
+ -fx-opacity:1.0;
 }
