@@ -103,18 +103,18 @@ public class Main extends Application {
                     int ID = (Integer.parseInt(blockElement.getAttribute("SID")));
 
                     //this part parse the position string to extract the 4 coordinates of the block and handles weather it's on index 0 or index 1
-                     double value1=0,value2=2,value3=0,value4=0;
-                      for (int j = 0; j < blockElement.getElementsByTagName("P").getLength(); j++) {
-                          if (blockElement.getElementsByTagName("P").item(j).getAttributes().item(0).getTextContent().equals("Position")) {
-                              String Position = blockElement.getElementsByTagName("P").item(j).getTextContent();
-                              Position = Position.replace("[", "").replace("]", ""); // Remove square brackets
-                              String[] strValues = Position.split(","); // Split by comma
-                              value1 = Double.parseDouble(strValues[0]);
-                              value2 = Double.parseDouble(strValues[1]);
-                              value3 = Double.parseDouble(strValues[2]);
-                              value4 = Double.parseDouble(strValues[3]);
-                          }
-                      }
+                    double value1 = 0, value2 = 2, value3 = 0, value4 = 0;
+                    for (int j = 0; j < blockElement.getElementsByTagName("P").getLength(); j++) {
+                        if (blockElement.getElementsByTagName("P").item(j).getAttributes().item(0).getTextContent().equals("Position")) {
+                            String Position = blockElement.getElementsByTagName("P").item(j).getTextContent();
+                            Position = Position.replace("[", "").replace("]", ""); // Remove square brackets
+                            String[] strValues = Position.split(","); // Split by comma
+                            value1 = Double.parseDouble(strValues[0]);
+                            value2 = Double.parseDouble(strValues[1]);
+                            value3 = Double.parseDouble(strValues[2]);
+                            value4 = Double.parseDouble(strValues[3]);
+                        }
+                    }
 
 
                     // this part extract the number of input and output ports and the flag is used to
@@ -136,7 +136,8 @@ public class Main extends Application {
                                 blockMirror = true;
                         }
                     }
-                    String inputs = "";
+                    String inputs = ""; // for Add class ( signs )
+                    String value = ""; // for constant class ( value )
 
                     Block b = switch (Name) {
                         case "Saturation" ->
@@ -146,7 +147,9 @@ public class Main extends Application {
                         case "Scope" ->
                                 new Scope(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror);
                         case "Add" ->
-                            new Add(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror,inputs);
+                                new Add(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror, inputs);
+                        case "Constant" ->
+                                new Constant(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror, value);
                         default ->
                                 new Block(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror);
                     };
