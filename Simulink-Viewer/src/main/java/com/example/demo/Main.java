@@ -135,7 +135,7 @@ public class Main extends Application {
                                 blockMirror = true;
                         }
                     }
-                    String inputs;
+                    String inputs = "";
 
                     Block b = switch (Name) {
                         case "Saturation" ->
