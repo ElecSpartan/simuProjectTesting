@@ -149,7 +149,6 @@ public class Main extends Application {
                             new Add(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror,inputs);
                         default ->
                                 new Block(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror);
-                        
                     };
 
                     blocks.add(b);
