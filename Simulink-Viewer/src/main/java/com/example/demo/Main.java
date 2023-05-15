@@ -100,6 +100,7 @@ public class Main extends Application {
 
                     //Extracting the information from the block tag
                     String Name = blockElement.getAttribute("Name");
+                    String BlockType= blockElement.getAttribute("BlockType");
                     int ID = (Integer.parseInt(blockElement.getAttribute("SID")));
 
                     //this part parse the position string to extract the 4 coordinates of the block and handles weather it's on index 0 or index 1
