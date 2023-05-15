@@ -1,14 +1,16 @@
 .root{
-    -fx-background-color : lightgrey;
+    -fx-background-color : #FFFFFF;
 }
 
 .label{
     -fx-font-weight: bold;
 }
 #LabelShape{
-    -fx-border-color: blue;
+    -fx-border-color: #006E90;
     -fx-border-width: 2px;
-    -fx-background-color:white
+    -fx-background-color:white;
+    -fx-border-radius : 8;
+    -fx-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 #LabelName{
@@ -17,15 +19,14 @@
 }
 
 Line{
-    -fx-stroke: red;
+    -fx-stroke: #006E90;
     -fx-stroke-width: 2px;
 }
 
 Polygon{
--fx-fill:red;
+-fx-fill: #006E90;
 }
 
 Circle{
- -fx-fill:BLACK;
- -fx-opacity:1.0;
+ -fx-fill: #006E90;
 }
