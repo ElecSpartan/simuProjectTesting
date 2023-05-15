@@ -10,12 +10,12 @@
     -fx-border-width: 2px;
     -fx-background-color:white;
     -fx-border-radius : 8;
-    -fx-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 #LabelName{
     -fx-font-size:10;
     -fx-alignment: center;
+
 }
 
 Line{
