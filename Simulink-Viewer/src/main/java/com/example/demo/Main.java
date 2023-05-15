@@ -103,18 +103,19 @@ public class Main extends Application {
                     int ID = (Integer.parseInt(blockElement.getAttribute("SID")));
 
                     //this part parse the position string to extract the 4 coordinates of the block and handles weather it's on index 0 or index 1
-                    String Position = blockElement.getElementsByTagName("P").item(0).getTextContent();
-                    Position = Position.replace("[", "").replace("]", ""); // Remove square brackets
-                    if (Position.length() <= 5) {
-                        inputs_ports_position_flag = true;
-                        Position = blockElement.getElementsByTagName("P").item(1).getTextContent();
-                        Position = Position.replace("[", "").replace("]", ""); // Remove square brackets
-                    }
-                    String[] strValues = Position.split(","); // Split by comma
-                    double left = Double.parseDouble(strValues[0]);
-                    double up = Double.parseDouble(strValues[1]);
-                    double right = Double.parseDouble(strValues[2]);
-                    double down = Double.parseDouble(strValues[3]);
+                     double value1=0,value2=2,value3=0,value4=0;
+                      for (int j = 0; j < blockElement.getElementsByTagName("P").getLength(); j++) {
+                          if (blockElement.getElementsByTagName("P").item(j).getAttributes().item(0).getTextContent().equals("Position")) {
+                              String Position = blockElement.getElementsByTagName("P").item(j).getTextContent();
+                              Position = Position.replace("[", "").replace("]", ""); // Remove square brackets
+                              String[] strValues = Position.split(","); // Split by comma
+                              value1 = Double.parseDouble(strValues[0]);
+                              value2 = Double.parseDouble(strValues[1]);
+                              value3 = Double.parseDouble(strValues[2]);
+                              value4 = Double.parseDouble(strValues[3]);
+                          }
+                      }
+
 
                     // this part extract the number of input and output ports and the flag is used to
                     int NumInputPorts = 1, NumOutputPorts = 1;
