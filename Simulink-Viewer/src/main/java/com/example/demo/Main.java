@@ -163,30 +163,7 @@ public class Main extends Application {
 
     public static void drawBlocks() {
         for (Block b : blocks) {
-            double width = b.getWidth();
-            double height = b.getHeight();
-            double left = b.getLeft();
-            double up = b.getUp();
-            double down = b.getDown();
-
-            // for the container
-            Label container = new Label();
-            container.setId("LabelShape");
-            container.setLayoutX(left);
-            container.setLayoutY(up);
-            container.setMinSize(width, height);
-
-            // for the name
-            Label name = new Label(b.getName());
-            name.applyCss();
-            HBox h = new HBox();
-            h.getChildren().add(name);
-            Scene s = new Scene(h);
-            name.applyCss();
-            name.setId("LabelName");
-            root.getChildren().addAll(container, name);
-            name.setLayoutX((left + width / 2.0) - (name.prefWidth(-1) / 2.0));
-            name.setLayoutY(down);
+            root.getChildren().addAll(b.getContainer(), b.getlName());
         }
     }
 

@@ -1,4 +1,9 @@
 package com.example.demo;
+
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+
 public class Block {
     private int ID;
     private String name;
@@ -9,10 +14,9 @@ public class Block {
     private boolean mirror;
     private int inputsNum;
     private int outputsNum;
+    Label container;
+    Label lName;
 
-    public Block() {
-
-    }
     public Block(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror) {
         this.ID = ID;
         this.name = name;
@@ -23,6 +27,23 @@ public class Block {
         this.inputsNum = inputsNum;
         this.outputsNum = outputsNum;
         this.mirror = mirror;
+
+
+        container = new Label();
+        container.setId("LabelShape");
+        container.setLayoutX(left);
+        container.setLayoutY(up);
+        container.setMinSize(right - left, down - up);
+
+
+        lName = new Label(name);
+        HBox h = new HBox();
+        h.getChildren().add(lName);
+        Scene s = new Scene(h);
+        lName.applyCss();
+        lName.setId("LabelName");
+        lName.setLayoutX((left  + (right - left)/ 2.0) - (lName.prefWidth(-1) / 2.0));
+        lName.setLayoutY(down);
     }
 
     public int getID() {
@@ -67,5 +88,13 @@ public class Block {
 
     public boolean isMirror() {
         return mirror;
+    }
+
+    public Label getContainer() {
+        return container;
+    }
+
+    public Label getlName() {
+        return lName;
     }
 }
