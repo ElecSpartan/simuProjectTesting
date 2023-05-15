@@ -136,7 +136,17 @@ public class Main extends Application {
                         }
                     }
 
-                    Block b = new Block(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+
+                    Block b;
+                    if (Name.equals("Saturation"))
+                        b = new Saturation(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+                    else if(Name.equals("Unit Delay"))
+                        b = new UnitDelay(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+                    else if(Name.equals("Scope"))
+                        b = new Scope(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+                    else
+                        b = new Block(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+
                     blocks.add(b);
                 }
             }
@@ -162,7 +172,7 @@ public class Main extends Application {
 
     public static void drawBlocks() {
         for (Block b : blocks) {
-            root.getChildren().addAll(b.getContainer(), b.getlName());
+            b.addBlock(root);
         }
     }
 

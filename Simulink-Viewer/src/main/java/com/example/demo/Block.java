@@ -2,7 +2,10 @@ package com.example.demo;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 public class Block {
     private int ID;
@@ -90,13 +93,69 @@ public class Block {
         return mirror;
     }
 
-    public Label getContainer() {
-        return container;
-    }
-
-    public Label getlName() {
-        return lName;
+    public void addBlock(Pane root) {
+        root.getChildren().addAll(container,lName);
     }
 }
 
+class Saturation extends Block {
+    static Image image = new Image("saturate.png");
+    ImageView imgview;
+
+
+    public Saturation(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror) {
+        super(ID, name, left, up, right, down, inputsNum, outputsNum, mirror);
+        imgview = new ImageView(image);
+    }
+
+    @Override
+    public void addBlock(Pane root) {
+        super.addBlock(root);
+        imgview.setX(super.getLeft() + 4);
+        imgview.setY(super.getUp() + 4);
+        imgview.setFitWidth(getWidth() - 8);
+        imgview.setFitHeight(getHeight() - 8);
+
+        root.getChildren().add(imgview);
+    }
+}
+class UnitDelay extends Block {
+    static Image image = new Image("ud.png");
+    ImageView imgview;
+
+
+    public UnitDelay(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror) {
+        super(ID, name, left, up, right, down, inputsNum, outputsNum, mirror);
+        imgview = new ImageView(image);
+    }
+
+    @Override
+    public void addBlock(Pane root) {
+        super.addBlock(root);
+        imgview.setX(super.getLeft() + 4);
+        imgview.setY(super.getUp() + 4);
+        imgview.setFitWidth(getWidth() - 8);
+        imgview.setFitHeight(getHeight() - 8);
+        root.getChildren().add(imgview);
+    }
+}
+class Scope extends Block {
+    static Image image = new Image("scope.png");
+    ImageView imgview;
+
+    public Scope(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror) {
+        super(ID, name, left, up, right, down, inputsNum, outputsNum, mirror);
+        imgview = new ImageView(image);
+    }
+
+    @Override
+    public void addBlock(Pane root) {
+        super.addBlock(root);
+        imgview.setX(super.getLeft() + 4);
+        imgview.setY(super.getUp() + 4);
+        imgview.setFitWidth(getWidth() - 8);
+        imgview.setFitHeight(getHeight() - 8);
+        root.getChildren().add(imgview);
+    }
+}
 
