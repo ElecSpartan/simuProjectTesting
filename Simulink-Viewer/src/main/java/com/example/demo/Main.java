@@ -158,7 +158,6 @@ public class Main extends Application {
         Arrow a4 = new Arrow(4, 1, -8);
         a4.addDest(3, -65);
         connections.add(a4);
-
     }
 
     public static void drawBlocks() {

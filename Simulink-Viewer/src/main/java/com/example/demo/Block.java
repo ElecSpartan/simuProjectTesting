@@ -42,7 +42,7 @@ public class Block {
         Scene s = new Scene(h);
         lName.applyCss();
         lName.setId("LabelName");
-        lName.setLayoutX((left  + (right - left)/ 2.0) - (lName.prefWidth(-1) / 2.0));
+        lName.setLayoutX((left + (right - left) / 2.0) - (lName.prefWidth(-1) / 2.0));
         lName.setLayoutY(down);
     }
 
@@ -98,3 +98,5 @@ public class Block {
         return lName;
     }
 }
+
+
