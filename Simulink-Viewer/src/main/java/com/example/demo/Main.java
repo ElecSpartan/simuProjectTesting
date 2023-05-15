@@ -140,15 +140,15 @@ public class Main extends Application {
 
                     Block b = switch (Name) {
                         case "Saturation" ->
-                                new Saturation(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+                                new Saturation(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror);
                         case "Unit Delay" ->
-                                new UnitDelay(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+                                new UnitDelay(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror);
                         case "Scope" ->
-                                new Scope(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+                                new Scope(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror);
                         case "Add" ->
-                            new Add(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror,inputs);
+                            new Add(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror,inputs);
                         default ->
-                                new Block(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+                                new Block(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror);
                         
                     };
 
