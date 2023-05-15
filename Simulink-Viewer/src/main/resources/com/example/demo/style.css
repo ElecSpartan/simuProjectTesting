@@ -14,8 +14,7 @@
 
 #LabelName{
     -fx-font-size:10;
-    -fx-alignment: center;
-
+    -fx-text-alignment: center;
 }
 
 Line{
