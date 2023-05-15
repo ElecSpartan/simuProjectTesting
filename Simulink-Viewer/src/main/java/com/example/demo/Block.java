@@ -164,14 +164,15 @@ class Add extends Block {
 
     public Add(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror, String inputs) {
         super(ID, name, left, up, right, down, inputsNum, outputsNum, mirror);
-        signs = inputs;
+        this.signs = inputs;
     }
 }
 
 class Constant extends Block {
     String value;
 
-    public Constant(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror) {
+    public Constant(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror,String value) {
         super(ID, name, left, up, right, down, inputsNum, outputsNum, mirror);
+        this.value = value;
     }
 }
