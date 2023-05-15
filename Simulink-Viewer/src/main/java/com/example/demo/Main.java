@@ -4,15 +4,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -180,10 +178,14 @@ public class Main extends Application {
 
             // for the name
             Label name = new Label(b.getName());
-            name.setMinWidth(1500);
+            name.applyCss();
+            HBox h = new HBox();
+            h.getChildren().add(name);
+            Scene s = new Scene(h);
+            name.applyCss();
             name.setId("LabelName");
             root.getChildren().addAll(container, name);
-            name.setLayoutX((left + width / 2.0) - (name.getMinWidth() / 2.0));
+            name.setLayoutX((left + width / 2.0) - (name.prefWidth(-1) / 2.0));
             name.setLayoutY(down);
         }
     }
