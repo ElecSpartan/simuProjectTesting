@@ -2,6 +2,8 @@ package com.example.demo;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -29,10 +31,12 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException, ParserConfigurationException, SAXException {
         Scene scene = new Scene(root, 1500, 790);
         stage.setTitle("Simulink viewer");
-
+        Image image = new Image("1.png");
+        ImageView imageView = new ImageView(image);
+        stage.getIcons().add(imageView.getImage());
         mdlParsing();
         drawBlocks();
-        //drawArrows();
+        drawArrows();
 
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         stage.setScene(scene);
@@ -41,8 +45,8 @@ public class Main extends Application {
 
     public static void mdlParsing() throws IOException, ParserConfigurationException, SAXException {
 
-        // taked the needed part only from the mdl file
-        File file = new File("exam1.mdl");
+        // taked the needed part for gui in a seperate file
+        File file = new File("Example.mdl");
         FileInputStream input = new FileInputStream(file);
         StringBuilder mdlFile = new StringBuilder();
         int x;
