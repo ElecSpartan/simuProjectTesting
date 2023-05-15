@@ -137,15 +137,16 @@ public class Main extends Application {
                     }
 
 
-                    Block b;
-                    if (Name.equals("Saturation"))
-                        b = new Saturation(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
-                    else if(Name.equals("Unit Delay"))
-                        b = new UnitDelay(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
-                    else if(Name.equals("Scope"))
-                        b = new Scope(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
-                    else
-                        b = new Block(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+                    Block b = switch (Name) {
+                        case "Saturation" ->
+                                new Saturation(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+                        case "Unit Delay" ->
+                                new UnitDelay(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+                        case "Scope" ->
+                                new Scope(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+                        default ->
+                                new Block(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+                    };
 
                     blocks.add(b);
                 }
