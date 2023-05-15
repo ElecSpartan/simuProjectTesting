@@ -159,3 +159,19 @@ class Scope extends Block {
     }
 }
 
+class Add extends Block {
+    String signs;
+
+    public Add(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror, String inputs) {
+        super(ID, name, left, up, right, down, inputsNum, outputsNum, mirror);
+        signs = inputs;
+    }
+}
+
+class Constant extends Block {
+    String value;
+
+    public Constant(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror) {
+        super(ID, name, left, up, right, down, inputsNum, outputsNum, mirror);
+    }
+}

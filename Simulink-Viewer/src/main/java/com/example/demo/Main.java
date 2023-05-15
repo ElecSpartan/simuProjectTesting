@@ -135,7 +135,7 @@ public class Main extends Application {
                                 blockMirror = true;
                         }
                     }
-
+                    String inputs;
 
                     Block b = switch (Name) {
                         case "Saturation" ->
@@ -144,6 +144,8 @@ public class Main extends Application {
                                 new UnitDelay(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
                         case "Scope" ->
                                 new Scope(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+                        case "Add" ->
+                            new Add(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror,inputs);
                         default ->
                                 new Block(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
                         
