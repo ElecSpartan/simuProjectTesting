@@ -146,6 +146,7 @@ public class Main extends Application {
                                 new Scope(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
                         default ->
                                 new Block(ID, Name, left, up, right, down, NumInputPorts, NumOutputPorts, blockMirror);
+                        
                     };
 
                     blocks.add(b);
