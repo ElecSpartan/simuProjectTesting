@@ -1,184 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <System>
-  <P Name="Location">[-1, -7, 1537, 825]</P>
+  <P Name="Location">[-8, -8, 1928, 1058]</P>
+  <P Name="SystemRect">[0.000000, 0.000000, 0.000000, 0.000000]</P>
+  <P Name="Open">on</P>
+  <P Name="SetExecutionDomain">off</P>
+  <P Name="ExecutionDomainType">Deduce</P>
+  <P Name="ZoomFactor">400</P>
   <P Name="ReportName">simulink-default.rpt</P>
-  <P Name="SIDHighWatermark">19</P>
-  <Block BlockType="Sum" Name="Add" SID="2">
-    <P Name="Ports">[2, 1]</P>
-    <P Name="Position">[470, 352, 500, 383]</P>
-    <P Name="ZOrder">2</P>
-    <P Name="IconShape">rectangular</P>
-  </Block>
-  <Block BlockType="Bias" Name="Bias" SID="17">
-    <P Name="Position">[585, 70, 625, 100]</P>
-    <P Name="ZOrder">24583</P>
-    <P Name="Bias">0.0</P>
-    <P Name="SaturateOnIntegerOverflow">off</P>
-  </Block>
-  <Block BlockType="Constant" Name="Constant" SID="3">
-    <P Name="Position">[160, 140, 190, 170]</P>
+  <P Name="SIDHighWatermark">7</P>
+  <P Name="SimulinkSubDomain">Simulink</P>
+  <Block BlockType="Sum" Name="Add" SID="3">
+    <P Name="Ports">[3, 1]</P>
+    <P Name="Position">[1040, 209, 1070, 241]</P>
     <P Name="ZOrder">3</P>
+    <P Name="IconShape">rectangular</P>
+    <P Name="Inputs">+++</P>
   </Block>
-  <Block BlockType="Constant" Name="Constant1" SID="4">
-    <P Name="Position">[90, 230, 120, 260]</P>
-    <P Name="ZOrder">4</P>
-  </Block>
-  <Block BlockType="Constant" Name="Constant2" SID="5">
-    <P Name="Position">[370, 230, 440, 280]</P>
+  <Block BlockType="Constant" Name="Constant" SID="5">
+    <P Name="Position">[780, 200, 810, 230]</P>
     <P Name="ZOrder">5</P>
   </Block>
-  <Block BlockType="Reference" Name="DQ Limiter" SID="12">
-    <P Name="Ports">[2, 3]</P>
-    <P Name="Position">[935, 325, 1055, 385]</P>
-    <P Name="ZOrder">24578</P>
-    <P Name="HideAutomaticName">off</P>
-    <P Name="LibraryVersion">2.0</P>
-    <P Name="SourceBlock">mcbcontrolslib/DQ Limiter</P>
-    <P Name="SourceType">DQ Limiter</P>
-    <InstanceData>
-      <P Name="RTWMemSecFuncInitTerm">Inherit from model</P>
-      <P Name="RTWMemSecFuncExecute">Inherit from model</P>
-      <P Name="RTWMemSecDataConstants">Inherit from model</P>
-      <P Name="RTWMemSecDataInternal">Inherit from model</P>
-      <P Name="RTWMemSecDataParameters">Inherit from model</P>
-      <P Name="ContentPreviewEnabled">on</P>
-      <P Name="satMethodInputType">Specify via dialog</P>
-      <P Name="satMethodSelected">D-Q equivalence</P>
-      <P Name="satLimitInputType">Specify via dialog</P>
-      <P Name="Vmax">1</P>
-    </InstanceData>
-  </Block>
-  <Block BlockType="Product" Name="Product" SID="6">
-    <P Name="Ports">[2, 1]</P>
-    <P Name="Position">[530, 149, 610, 211]</P>
-    <P Name="ZOrder">6</P>
-  </Block>
-  <Block BlockType="Saturate" Name="Saturation" SID="9">
-    <P Name="Position">[610, 260, 640, 290]</P>
-    <P Name="ZOrder">9</P>
-  </Block>
-  <Block BlockType="Reference" Name="Saturation&#xA;Dynamic" SID="11">
-    <P Name="Ports">[3, 1]</P>
-    <P Name="Position">[855, 170, 935, 210]</P>
-    <P Name="ZOrder">11</P>
-    <P Name="LibraryVersion">1.0</P>
-    <P Name="SourceBlock">simulink/Discontinuities/Saturation
-Dynamic</P>
-    <P Name="SourceType">Saturation Dynamic</P>
-    <InstanceData>
-      <P Name="RTWMemSecFuncInitTerm">Inherit from model</P>
-      <P Name="RTWMemSecFuncExecute">Inherit from model</P>
-      <P Name="RTWMemSecDataConstants">Inherit from model</P>
-      <P Name="RTWMemSecDataInternal">Inherit from model</P>
-      <P Name="RTWMemSecDataParameters">Inherit from model</P>
-      <P Name="ContentPreviewEnabled">on</P>
-      <P Name="OutMin">[]</P>
-      <P Name="OutMax">[]</P>
-      <P Name="OutDataTypeStr">Inherit: Same as second input</P>
-      <P Name="OutputDataTypeScalingMode">Same as second input</P>
-      <P Name="OutDataType">fixdt(1, 16)</P>
-      <P Name="OutScaling">2^-10</P>
-      <P Name="LockScale">off</P>
-      <P Name="RndMeth">Floor</P>
-      <P Name="DoSatur">off</P>
-    </InstanceData>
-  </Block>
-  <Block BlockType="Saturate" Name="Saturation1" SID="10">
-    <P Name="Position">[750, 260, 780, 290]</P>
-    <P Name="ZOrder">10</P>
-  </Block>
-  <Block BlockType="Saturate" Name="Saturation2" SID="14">
-    <P Name="Position">[80, 420, 110, 450]</P>
-    <P Name="ZOrder">24580</P>
+  <Block BlockType="Saturate" Name="Saturation" SID="1">
+    <P Name="Position">[935, 200, 965, 230]</P>
+    <P Name="ZOrder">1</P>
   </Block>
   <Block BlockType="Scope" Name="Scope" SID="7">
     <P Name="Ports">[1]</P>
-    <P Name="Position">[680, 149, 710, 181]</P>
+    <P Name="Position">[1130, 209, 1160, 241]</P>
     <P Name="ZOrder">7</P>
-    <P Name="ScopeSpecificationString">Simulink.scopes.TimeScopeBlockCfg(&apos;CurrentConfiguration&apos;, extmgr.ConfigurationSet(extmgr.Configuration(&apos;Core&apos;,&apos;General UI&apos;,true),extmgr.Configuration(&apos;Core&apos;,&apos;Source UI&apos;,true),extmgr.Configuration(&apos;Sources&apos;,&apos;WiredSimulink&apos;,true),extmgr.Configuration(&apos;Visuals&apos;,&apos;Time Domain&apos;,true),extmgr.Configuration(&apos;Tools&apos;,&apos;Plot Navigation&apos;,true),extmgr.Configuration(&apos;Tools&apos;,&apos;Measurements&apos;,true)),&apos;Version&apos;,&apos;2022b&apos;)</P>
+    <P Name="ScopeSpecificationString"></P>
     <P Name="NumInputPorts">1</P>
     <P Name="Floating">off</P>
   </Block>
-  <Block BlockType="Sum" Name="Subtract" SID="16">
-    <P Name="Ports">[2, 1]</P>
-    <P Name="Position">[200, 229, 265, 291]</P>
-    <P Name="ZOrder">24582</P>
-    <P Name="IconShape">rectangular</P>
-    <P Name="Inputs">+-</P>
-  </Block>
-  <Block BlockType="Sum" Name="Sum of&#xA;Elements" SID="18">
-    <P Name="Ports">[1, 1]</P>
-    <P Name="Position">[335, 60, 365, 90]</P>
-    <P Name="ZOrder">24584</P>
-    <P Name="IconShape">rectangular</P>
-    <P Name="Inputs">+</P>
-  </Block>
-  <Block BlockType="UnitDelay" Name="Unit Delay" SID="8">
-    <P Name="Position">[410, 323, 445, 357]</P>
-    <P Name="ZOrder">8</P>
+  <Block BlockType="UnitDelay" Name="Unit Delay" SID="4">
+    <P Name="Position">[1040, 283, 1075, 317]</P>
+    <P Name="ZOrder">4</P>
+    <P Name="BlockMirror">on</P>
     <P Name="SampleTime">-1</P>
     <P Name="HasFrameUpgradeWarning">on</P>
   </Block>
-  <Block BlockType="SampleTimeMath" Name="Weighted&#xA;Sample Time" SID="19">
-    <P Name="Position">[895, 509, 940, 551]</P>
-    <P Name="ZOrder">24585</P>
-    <P Name="TsampMathOp">Ts Only</P>
-  </Block>
-  <Block BlockType="SampleTimeMath" Name="Weighted&#xA;Sample Time&#xA;Math" SID="15">
-    <P Name="Position">[485, 510, 515, 540]</P>
-    <P Name="ZOrder">24581</P>
-  </Block>
+  <Line>
+    <P Name="ZOrder">18</P>
+    <P Name="Src">5#out:1</P>
+    <P Name="Dst">1#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">2</P>
+    <P Name="Src">1#out:1</P>
+    <P Name="Points">[44, 0]</P>
+    <Branch>
+      <P Name="ZOrder">15</P>
+      <P Name="Points">[0, 10]</P>
+      <P Name="Dst">3#in:2</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">14</P>
+      <P Name="Dst">3#in:1</P>
+    </Branch>
+  </Line>
+  <Line>
+    <P Name="ZOrder">3</P>
+    <P Name="Src">3#out:1</P>
+    <P Name="Points">[40, 0]</P>
+    <Branch>
+      <P Name="ZOrder">13</P>
+      <P Name="Points">[0, 75]</P>
+      <P Name="Dst">4#in:1</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">10</P>
+      <P Name="Dst">7#in:1</P>
+    </Branch>
+  </Line>
   <Line>
     <P Name="ZOrder">4</P>
     <P Name="Src">4#out:1</P>
-    <P Name="Points">[40, 0; 0, 130]</P>
-    <P Name="Dst">2#in:2</P>
-  </Line>
-  <Line>
-    <P Name="ZOrder">5</P>
-    <P Name="Src">3#out:1</P>
-    <P Name="Points">[260, 0]</P>
-    <P Name="Dst">2#in:1</P>
-  </Line>
-  <Line>
-    <P Name="ZOrder">6</P>
-    <P Name="Src">2#out:1</P>
-    <P Name="Points">[9, 0; 0, -205]</P>
-    <P Name="Dst">6#in:1</P>
-  </Line>
-  <Line>
-    <P Name="ZOrder">7</P>
-    <P Name="Src">5#out:1</P>
-    <P Name="Points">[48, 0; 0, -60]</P>
-    <P Name="Dst">6#in:2</P>
-  </Line>
-  <Line>
-    <P Name="ZOrder">8</P>
-    <P Name="Src">6#out:1</P>
-    <P Name="Points">[30, 0; 0, -15]</P>
-    <P Name="Dst">7#in:1</P>
-  </Line>
-  <Line>
-    <P Name="ZOrder">9</P>
-    <P Name="Src">8#out:1</P>
-    <P Name="Points">[78, 0; 0, -65]</P>
-    <P Name="Dst">9#in:1</P>
-  </Line>
-  <Line>
-    <P Name="ZOrder">10</P>
-    <P Name="Src">9#out:1</P>
-    <P Name="Dst">10#in:1</P>
-  </Line>
-  <Line>
-    <P Name="ZOrder">13</P>
-    <P Name="Src">10#out:1</P>
-    <P Name="Points">[19, 0; 0, 175; -418, 0; 0, -110]</P>
-    <P Name="Dst">8#in:1</P>
-  </Line>
-  <Line>
-    <P Name="ZOrder">15</P>
-    <P Name="Src">16#out:1</P>
-    <P Name="Points">[30, 0; 0, -185]</P>
-    <P Name="Dst">18#in:1</P>
+    <P Name="Points">[-8, 0; 0, -65]</P>
+    <P Name="Dst">3#in:3</P>
   </Line>
 </System>

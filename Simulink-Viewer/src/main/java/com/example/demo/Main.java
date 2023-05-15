@@ -34,7 +34,7 @@ public class Main extends Application {
         stage.getIcons().add(imageView.getImage());
         mdlParsing();
         drawBlocks();
-      //  drawArrows();
+        drawArrows();
 
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         stage.setScene(scene);
@@ -44,7 +44,7 @@ public class Main extends Application {
     public static void mdlParsing() throws IOException, ParserConfigurationException, SAXException {
 
         // taked the needed part for gui in a seperate file
-        File file = new File("exam2.mdl");
+        File file = new File("Example.mdl");
         FileInputStream input = new FileInputStream(file);
         StringBuilder mdlFile = new StringBuilder();
         int x;
