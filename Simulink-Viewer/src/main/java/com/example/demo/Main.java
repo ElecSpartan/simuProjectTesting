@@ -140,14 +140,14 @@ public class Main extends Application {
                     String inputs = ""; // for Add class ( signs )
                     String value = ""; // for constant class ( value )
 
-                    Block b = switch (Name) {
-                        case "Saturation" ->
+                    Block b = switch (BlockType) {
+                        case "Saturate" ->
                                 new Saturation(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror);
-                        case "Unit Delay" ->
+                        case "UnitDelay" ->
                                 new UnitDelay(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror);
                         case "Scope" ->
                                 new Scope(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror);
-                        case "Add" ->
+                        case "Sum" ->
                                 new Add(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror, inputs);
                         case "Constant" ->
                                 new Constant(ID, Name, value1, value2, value3, value4, NumInputPorts, NumOutputPorts, blockMirror, value);
