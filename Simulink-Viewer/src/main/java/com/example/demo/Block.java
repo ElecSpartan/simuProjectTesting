@@ -1,11 +1,11 @@
 package com.example.demo;
 
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 
 public class Block {
     private int ID;
@@ -93,7 +93,7 @@ public class Block {
         return mirror;
     }
 
-    public void addBlock(Pane root) {
+    public void addBlock(Group root) {
         root.getChildren().addAll(container,lName);
     }
 }
@@ -109,7 +109,7 @@ class Saturation extends Block {
     }
 
     @Override
-    public void addBlock(Pane root) {
+    public void addBlock(Group root) {
         super.addBlock(root);
         imgview.setX(super.getLeft() + 4);
         imgview.setY(super.getUp() + 4);
@@ -130,7 +130,7 @@ class UnitDelay extends Block {
     }
 
     @Override
-    public void addBlock(Pane root) {
+    public void addBlock(Group root) {
         super.addBlock(root);
         imgview.setX(super.getLeft() + 4);
         imgview.setY(super.getUp() + 4);
@@ -149,7 +149,7 @@ class Scope extends Block {
     }
 
     @Override
-    public void addBlock(Pane root) {
+    public void addBlock(Group root) {
         super.addBlock(root);
         imgview.setX(super.getLeft() + 4);
         imgview.setY(super.getUp() + 4);

@@ -1,11 +1,11 @@
 package com.example.demo;
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
@@ -23,27 +23,29 @@ import java.util.Scanner;
 public class Main extends Application {
     static private List<Block> blocks = new ArrayList<Block>(); // for the blocks
     static private List<Arrow> connections = new ArrayList<Arrow>(); // for the connections
-    static private Pane root = new Pane();
+    static private Group root = new Group();
 
     @Override
     public void start(Stage stage) throws IOException, ParserConfigurationException, SAXException {
-        Scene scene = new Scene(root, 1500, 790);
-        stage.setTitle("Simulink viewer");
+        Scene scene = new Scene(root, 1500, 790);  // setting the width and height of the window
+        stage.setTitle("Simulink viewer");               // setting title of the window
+
         Image image = new Image("1.png");
         ImageView imageView = new ImageView(image);
-        stage.getIcons().add(imageView.getImage());
-        mdlParsing();
+        stage.getIcons().add(imageView.getImage());     // setting icon of the program
+        mdlParsing();                                   // parsing the mdl file
         drawBlocks();
         drawArrows();
 
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        root.autosize();
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());   // setting the style of the window
         stage.setScene(scene);
-        stage.show();
+        mouseEvents(scene, stage);
+        stage.show();   // displaying
     }
 
     public static void mdlParsing() throws IOException, ParserConfigurationException, SAXException {
 
-        // taked the needed part for gui in a seperate file
         File file = new File("Example.mdl");
         FileInputStream input = new FileInputStream(file);
         StringBuilder mdlFile = new StringBuilder();
@@ -100,7 +102,7 @@ public class Main extends Application {
 
                     //Extracting the information from the block tag
                     String Name = blockElement.getAttribute("Name");
-                    String BlockType= blockElement.getAttribute("BlockType");
+                    String BlockType = blockElement.getAttribute("BlockType");
                     int ID = (Integer.parseInt(blockElement.getAttribute("SID")));
 
                     //this part parse the position string to extract the 4 coordinates of the block and handles weather it's on index 0 or index 1
@@ -247,5 +249,18 @@ public class Main extends Application {
                 return b;
         }
         return null;
+    }
+
+    public static void mouseEvents(Scene scene, Stage stage) {
+        scene.setOnScroll(e -> {
+            double zoomFactor = 1.05;
+            double deltaY = e.getDeltaY();
+
+            if (deltaY < 0) {
+                zoomFactor = 0.95;
+            }
+            root.setScaleX(root.getScaleX() * zoomFactor);
+            root.setScaleY(root.getScaleY() * zoomFactor);
+        });
     }
 }
