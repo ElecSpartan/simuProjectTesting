@@ -161,17 +161,21 @@ class Scope extends Block {
 
 class Add extends Block {
     String signs;
-
     public Add(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror, String inputs) {
         super(ID, name, left, up, right, down, inputsNum, outputsNum, mirror);
         this.signs = inputs;
+        this.container.setText(signs);
+    }
+    @Override
+    public void addBlock(Group root) {
+        super.addBlock(root);
     }
 }
 
 class Constant extends Block {
-    String value;
+    String  value;
 
-    public Constant(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror,String value) {
+    public Constant(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror, String value) {
         super(ID, name, left, up, right, down, inputsNum, outputsNum, mirror);
         this.value = value;
     }

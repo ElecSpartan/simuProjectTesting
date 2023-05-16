@@ -134,12 +134,12 @@ public class Main extends Application {
                     
                     // extracting the inputs if the BlockType is ADD
                      String inputs = ""; // for Add class ( signs )
-                    if(BlockType=="Sum"){
+                    if(BlockType.equals("Sum")){
                             for (int j = 0; j < blockElement.getElementsByTagName("P").getLength(); j++) {
                                 if (blockElement.getElementsByTagName("P").item(j).getAttributes().item(0).getTextContent().equals("Inputs")) {
-                                    Inputs = blockElement.getElementsByTagName("P").item(j).getTextContent();
+                                    inputs = blockElement.getElementsByTagName("P").item(j).getTextContent();
+                                    break;
                                 }
-                                break;
                             }
                         }
 
@@ -149,8 +149,8 @@ public class Main extends Application {
                                 blockMirror = true;
                         }
                     }
-                
-                    double value = 0.0; // for constant class ( value )
+
+                    String value = ""; // for constant class ( value )
 
                     Block b = switch (BlockType) {
                         case "Saturate" ->
