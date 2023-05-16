@@ -275,8 +275,3 @@ public class Main extends Application {
     }
 }
 
-
-class Delta {
-    double x;
-    double y;
-}
