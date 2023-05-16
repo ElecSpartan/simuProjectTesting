@@ -131,6 +131,17 @@ public class Main extends Application {
                             NumOutputPorts = 0;
                         }
                     }
+                    
+                    // extracting the inputs if the BlockType is ADD
+                     String inputs = ""; // for Add class ( signs )
+                    if(BlockType=="Sum"){
+                            for (int j = 0; j < blockElement.getElementsByTagName("P").getLength(); j++) {
+                                if (blockElement.getElementsByTagName("P").item(j).getAttributes().item(0).getTextContent().equals("Inputs")) {
+                                    Inputs = blockElement.getElementsByTagName("P").item(j).getTextContent();
+                                }
+                                break;
+                            }
+                        }
 
                     for (int j = 0; j < blockElement.getElementsByTagName("P").getLength(); j++) {
                         if (blockElement.getElementsByTagName("P").item(j).getAttributes().item(0).getTextContent().equals("BlockMirror")) {
@@ -138,8 +149,8 @@ public class Main extends Application {
                                 blockMirror = true;
                         }
                     }
-                    String inputs = ""; // for Add class ( signs )
-                    String value = ""; // for constant class ( value )
+                
+                    double value = 0.0; // for constant class ( value )
 
                     Block b = switch (BlockType) {
                         case "Saturate" ->
