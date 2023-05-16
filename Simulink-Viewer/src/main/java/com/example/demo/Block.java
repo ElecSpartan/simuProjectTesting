@@ -7,6 +7,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Block {
     private int ID;
     private String name;
@@ -17,8 +20,8 @@ public class Block {
     private boolean mirror;
     private int inputsNum;
     private int outputsNum;
-    Label container;
-    Label lName;
+    private Label container;
+    private Label lName;
 
     public Block(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror) {
         this.ID = ID;
@@ -93,6 +96,14 @@ public class Block {
         return mirror;
     }
 
+    public Label getContainer() {
+        return container;
+    }
+
+    public Label getlName() {
+        return lName;
+    }
+
     public void addBlock(Group root) {
         root.getChildren().addAll(container,lName);
     }
@@ -161,11 +172,20 @@ class Scope extends Block {
 
 class Add extends Block {
     String signs;
+
     public Add(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror, String inputs) {
         super(ID, name, left, up, right, down, inputsNum, outputsNum, mirror);
         this.signs = inputs;
-        this.container.setText(signs);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < signs.length(); i++) {
+            sb.append(signs.charAt(i));
+            if (i != signs.length() - 1)
+                sb.append('\n');
+        }
+        signs = sb.toString();
+        super.getContainer().setText(signs);
     }
+
     @Override
     public void addBlock(Group root) {
         super.addBlock(root);

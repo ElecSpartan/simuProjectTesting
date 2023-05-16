@@ -272,6 +272,7 @@ public class Main extends Application {
             root.setScaleX(root.getScaleX() * zoomFactor);
             root.setScaleY(root.getScaleY() * zoomFactor);
         });
+
     }
 }
 
