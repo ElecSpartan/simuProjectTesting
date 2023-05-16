@@ -24,7 +24,6 @@ public class Main extends Application {
     static private List<Block> blocks = new ArrayList<Block>(); // for the blocks
     static private List<Arrow> connections = new ArrayList<Arrow>(); // for the connections
     static private Group root = new Group();
-
     @Override
     public void start(Stage stage) throws IOException, ParserConfigurationException, SAXException {
         Scene scene = new Scene(root, 1500, 790);  // setting the width and height of the window
@@ -37,7 +36,7 @@ public class Main extends Application {
         drawBlocks();
         drawArrows();
 
-        root.autosize();
+
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());   // setting the style of the window
         stage.setScene(scene);
         mouseEvents(scene, stage);
