@@ -21,9 +21,9 @@ public class Test {
                 File file = new File("Example.mdl");
                 FileInputStream input = new FileInputStream(file);
                 StringBuilder s = new StringBuilder();
-                int x;
-                while ((x = input.read()) != -1) {
-                    s.append((char) x);
+                int q;
+                while ((q = input.read()) != -1) {
+                    s.append((char) q);
                 }
                 String code = s.toString();
                 Scanner scanner = new Scanner(code);
@@ -73,9 +73,28 @@ public class Test {
                                     String srcInfo=(lineElement.getElementsByTagName("P").item(j).getTextContent());
                                     srcId=srcInfo.charAt(0)-'0';
                                     srcPlace=srcInfo.charAt(6)-'0';
-                                    System.out.println(srcId+" "+srcPlace);
+                                    //System.out.println(srcId+" "+srcPlace);
                                 }
                             }
+
+                            //getting x
+                            double x=0;
+                            String points="";
+                            if(getPIndexByName(lineElement, "Points")!=-1)
+                                points = lineElement.getElementsByTagName("P").item(getPIndexByName(lineElement, "Points")).getTextContent();
+                            if(points.length()>0) {
+                                boolean neg = false;
+                                String pointInfo="";
+                                for(int k=1;k<points.length();k++){
+                                    if(points.charAt(k)==',')
+                                        break;
+                                    else
+                                        pointInfo+=points.charAt(k);
+                                }
+                                x=Double.parseDouble(pointInfo);
+                            }
+                            System.out.println(points+" "+x+" "+points.length());
+
                         }
                     }
                 }
@@ -84,4 +103,14 @@ public class Test {
                 e.printStackTrace();
             }
         }
+    private static int getPIndexByName(Element element, String name) {
+        NodeList pList = element.getElementsByTagName("P");
+        for (int i = 0; i < pList.getLength(); i++) {
+            Element pElement = (Element) pList.item(i);
+            if (pElement.getAttribute("Name").equals(name)) {
+                return i;
+            }
+        }
+        return -1; // Not found
+    }
 }
