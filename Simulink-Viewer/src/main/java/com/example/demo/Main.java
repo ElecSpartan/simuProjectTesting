@@ -48,9 +48,9 @@ public class Main extends Application {
         File file = new File("Example.mdl");
         FileInputStream input = new FileInputStream(file);
         StringBuilder mdlFile = new StringBuilder();
-        int x;
-        while ((x = input.read()) != -1) {
-            mdlFile.append((char) x);
+        int q;
+        while ((q = input.read()) != -1) {
+            mdlFile.append((char) q);
         }
         String mdlFileS = mdlFile.toString();
         Scanner scanner = new Scanner(mdlFileS);
@@ -85,7 +85,7 @@ public class Main extends Application {
 
 
         addBlocks(rootElement, doc);
-        addArrows();
+        //addArrows(rootElement, doc);
     }
 
     public static void addBlocks(Element rootElement, Document doc) {
@@ -173,21 +173,29 @@ public class Main extends Application {
         }
     }
 
-    public static void addArrows() {
-        Arrow a1 = new Arrow(5, 1, 0);
-        a1.addDest(1, 0);
-        connections.add(a1);
-        Arrow a2 = new Arrow(1, 1, 44);
-        a2.addDest(3, 0);
-        a2.addDest(3, 10);
-        connections.add(a2);
-        Arrow a3 = new Arrow(3, 1, 40);
-        a3.addDest(4, 75);
-        a3.addDest(7, 0);
-        connections.add(a3);
-        Arrow a4 = new Arrow(4, 1, -8);
-        a4.addDest(3, -65);
-        connections.add(a4);
+    public static void addArrows(Element rootElement, Document doc) {
+        if (rootElement.getTagName().equals("System")) {
+            NodeList lineList = doc.getElementsByTagName("Line");
+            for (int i = 0; i < lineList.getLength(); i++) {
+                Node lineNode = lineList.item(i);
+                //NodeList childNodes = lineNode.getChildNodes();
+                if (lineNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element lineElement = (Element) lineNode;
+
+                    // looping on the tags to find srcID srcPlace
+                    int srcId=0,srcPlace=0;
+                    for (int j = 0; j < lineElement.getElementsByTagName("P").getLength(); j++) {
+                        if(lineElement.getElementsByTagName("P").item(j).getAttributes().item(0).getTextContent().equals("Src")){
+                            /*srcId = Integer.parseInt*/
+                            String srcInfo=(lineElement.getElementsByTagName("P").item(j).getTextContent());
+                            srcId=srcInfo.charAt(0)-'0';
+                            srcPlace=srcInfo.charAt(6)-'0';
+                            System.out.println(srcId+" "+srcPlace);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public static void drawBlocks() {
