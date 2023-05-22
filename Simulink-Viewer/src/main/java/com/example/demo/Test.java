@@ -92,9 +92,9 @@ public class Test {
                                 }
                             }
 
-                            // dstID and y if there is no branches
+                            // dstID if there is no branches
                             if(branchList.getLength()==0){
-                                int destId=0 ;double y=0;
+                                int destId=0 ;
                                 for (int j = 0; j < lineElement.getElementsByTagName("P").getLength(); j++) {
                                     if(lineElement.getElementsByTagName("P").item(j).getAttributes().item(0).getTextContent().equals("Dst")){
                                         String dst=(lineElement.getElementsByTagName("P").item(j).getTextContent());
@@ -109,25 +109,46 @@ public class Test {
                                         //System.out.println(destId);
                                     }
                                 }
-                            }
 
-
-                            //getting x and y of the line
-                            /*double x=0;
-                            String points="";
-                            if(getPIndexByName(lineElement, "Points")!=-1)
-                                points = lineElement.getElementsByTagName("P").item(getPIndexByName(lineElement, "Points")).getTextContent();
-                            if(points.length()>0) {
-                                String pointInfo="";
-                                for(int k=1;k<points.length();k++){
-                                    if(points.charAt(k)==',')
-                                        break;
+                                //getting x and y of the line if there is no branches
+                                double x=0,y=0;
+                                String points="";
+                                if(getPIndexByName(lineElement, "Points")!=-1)
+                                    points = lineElement.getElementsByTagName("P").item(getPIndexByName(lineElement, "Points")).getTextContent();
+                                if(points.length()>0) {
+                                    String pointInfo="";
+                                    for(int k=1;k<points.length();k++){
+                                        if(points.charAt(k)==',')
+                                            break;
+                                        else
+                                            pointInfo+=points.charAt(k);
+                                    }
+                                    x=Double.parseDouble(pointInfo);
+                                    Arrow arrow = new Arrow(srcId,srcPlace,x);
+                                    //to check if the string has y coordinations
+                                    boolean yFlag=false;
+                                    for(int k=0;k<points.length();k++){
+                                        if(points.charAt(k)==';') yFlag=true;
+                                    }
+                                    if(yFlag){
+                                        int index=-1;
+                                        String yString = "";
+                                        for(int k=points.length()-2;k>=0;k--){
+                                            if(points.charAt(k)==' ') {
+                                                index=k+1;
+                                                break;
+                                            }
+                                        }
+                                        for(int k=index;k<points.length()-1;k++)  yString+=points.charAt(k);
+                                        y=Double.parseDouble(yString);
+                                        arrow.addDest(destId,y);
+                                    }
                                     else
-                                        pointInfo+=points.charAt(k);
+                                        arrow.addDest(destId,y);
                                 }
-                                x=Double.parseDouble(pointInfo);
+                                System.out.println(destId);
+                                System.out.println(x+" "+y);
                             }
-                            System.out.println(points+" "+x+" "+points.length());*/
 
                         }
                     }
