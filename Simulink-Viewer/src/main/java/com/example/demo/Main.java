@@ -174,25 +174,99 @@ public class Main extends Application {
     }
 
     public static void addArrows(Element rootElement, Document doc) {
-        if (rootElement.getTagName().equals("System")) {
+        if(rootElement.getTagName().equals("System")){
             NodeList lineList = doc.getElementsByTagName("Line");
             for (int i = 0; i < lineList.getLength(); i++) {
                 Node lineNode = lineList.item(i);
                 //NodeList childNodes = lineNode.getChildNodes();
                 if (lineNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element lineElement = (Element) lineNode;
-
+                    NodeList branchList = lineElement.getElementsByTagName("Branch");
                     // looping on the tags to find srcID srcPlace
                     int srcId=0,srcPlace=0;
                     for (int j = 0; j < lineElement.getElementsByTagName("P").getLength(); j++) {
                         if(lineElement.getElementsByTagName("P").item(j).getAttributes().item(0).getTextContent().equals("Src")){
-                            /*srcId = Integer.parseInt*/
-                            String srcInfo=(lineElement.getElementsByTagName("P").item(j).getTextContent());
-                            srcId=srcInfo.charAt(0)-'0';
-                            srcPlace=srcInfo.charAt(6)-'0';
-                            System.out.println(srcId+" "+srcPlace);
+                            String src=(lineElement.getElementsByTagName("P").item(j).getTextContent());
+                            String srcIdInfo=""; String srcPlaceInfo="";
+                            for(int k=0;k<src.length();k++){
+                                if(src.charAt(k)=='#')
+                                    break;
+                                else
+                                    srcIdInfo+=src.charAt(k);
+                            }
+                            int idx=-1;
+                            for(int k=0;k<src.length();k++){
+                                if(src.charAt(k)==':') {
+                                    idx=k+1;
+                                    break;
+                                }
+                            }
+                            for(int k=idx;k<src.length();k++)
+                                srcPlaceInfo+=src.charAt(k);
+                            srcId = Integer.parseInt(srcIdInfo);
+                            srcPlace = Integer.parseInt(srcPlaceInfo);
+                            //System.out.println(srcId+" "+srcPlace);
                         }
                     }
+
+                    // dstID if there is no branches
+                    if(branchList.getLength()==0){
+                        int destId=0 ;
+                        for (int j = 0; j < lineElement.getElementsByTagName("P").getLength(); j++) {
+                            if(lineElement.getElementsByTagName("P").item(j).getAttributes().item(0).getTextContent().equals("Dst")){
+                                String dst=(lineElement.getElementsByTagName("P").item(j).getTextContent());
+                                String dstIdInfo="";
+                                for(int k=0;k<dst.length();k++){
+                                    if(dst.charAt(k)=='#')
+                                        break;
+                                    else
+                                        dstIdInfo+=dst.charAt(k);
+                                }
+                                destId = Integer.parseInt(dstIdInfo);
+                                //System.out.println(destId);
+                            }
+                        }
+
+                        //getting x and y of the line if there is no branches
+                        double x=0,y=0;
+                        String points="";
+                        if(getPIndexByName(lineElement, "Points")!=-1)
+                            points = lineElement.getElementsByTagName("P").item(getPIndexByName(lineElement, "Points")).getTextContent();
+                        //to check if the string has y coordinations
+                        boolean yFlag=false;
+                        if(points.length()>0) {
+                            String pointInfo="";
+                            for(int k=1;k<points.length();k++){
+                                if(points.charAt(k)==',')
+                                    break;
+                                else
+                                    pointInfo+=points.charAt(k);
+                            }
+                            x=Double.parseDouble(pointInfo);
+
+                            for(int k=0;k<points.length();k++){
+                                if(points.charAt(k)==';') yFlag=true;
+                            }
+                            if(yFlag){
+                                int index=-1;
+                                String yString = "";
+                                for(int k=points.length()-2;k>=0;k--){
+                                    if(points.charAt(k)==' ') {
+                                        index=k+1;
+                                        break;
+                                    }
+                                }
+                                for(int k=index;k<points.length()-1;k++)  yString+=points.charAt(k);
+                                y=Double.parseDouble(yString);
+                            }
+                        }
+                        //System.out.println(destId);
+                        //System.out.println(x+" "+y);
+                        Arrow arrow=new Arrow(srcId,srcPlace,x);
+                        arrow.addDest(destId,y);
+                        connections.add(arrow);
+                    }
+
                 }
             }
         }
@@ -203,7 +277,16 @@ public class Main extends Application {
             b.addBlock(root);
         }
     }
-
+    private static int getPIndexByName(Element element, String name) {
+        NodeList pList = element.getElementsByTagName("P");
+        for (int i = 0; i < pList.getLength(); i++) {
+            Element pElement = (Element) pList.item(i);
+            if (pElement.getAttribute("Name").equals(name)) {
+                return i;
+            }
+        }
+        return -1; // Not found
+    }
     public static void drawArrows() {
         double arrowSize = 5;
         for (Arrow a : connections) {
