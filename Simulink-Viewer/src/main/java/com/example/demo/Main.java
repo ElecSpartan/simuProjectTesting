@@ -85,7 +85,7 @@ public class Main extends Application {
 
 
         addBlocks(rootElement, doc);
-        //addArrows(rootElement, doc);
+        addArrows(rootElement, doc);
     }
 
     public static void addBlocks(Element rootElement, Document doc) {
@@ -260,8 +260,7 @@ public class Main extends Application {
                                 y=Double.parseDouble(yString);
                             }
                         }
-                        //System.out.println(destId);
-                        //System.out.println(x+" "+y);
+
                         Arrow arrow=new Arrow(srcId,srcPlace,x);
                         arrow.addDest(destId,y);
                         connections.add(arrow);
