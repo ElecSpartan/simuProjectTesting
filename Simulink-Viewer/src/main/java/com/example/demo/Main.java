@@ -209,6 +209,43 @@ public class Main extends Application {
                         }
                     }
 
+                    //getting x and y of the line if there is no branches
+                    double x=0,y=0;
+                    String points="";
+                    if(getPIndexByName(lineElement, "Points")!=-1)
+                        points = lineElement.getElementsByTagName("P").item(getPIndexByName(lineElement, "Points")).getTextContent();
+                    if(points.length()>0) {
+                        String pointInfo="";
+                        for(int k=1;k<points.length();k++){
+                            if(points.charAt(k)==',')
+                                break;
+                            else
+                                pointInfo+=points.charAt(k);
+                        }
+                        x=Double.parseDouble(pointInfo);
+                        //to check if the string has y coordinations
+                        boolean yFlag=false;
+                        for(int k=0;k<points.length();k++){
+                            if(points.charAt(k)==';') yFlag=true;
+                        }
+                        if(yFlag){
+                            int index=-1;
+                            String yString = "";
+                            for(int k=points.length()-2;k>=0;k--){
+                                if(points.charAt(k)==' ') {
+                                    index=k+1;
+                                    break;
+                                }
+                            }
+                            for(int k=index;k<points.length()-1;k++)  yString+=points.charAt(k);
+                            y=Double.parseDouble(yString);
+                        }
+                    }
+
+                    /////////////////the object//////////////////////////
+                    Arrow arrow = new Arrow(srcId,srcPlace,x);
+
+
                     // dstID if there is no branches
                     if(branchList.getLength()==0){
                         int destId=0 ;
@@ -226,46 +263,49 @@ public class Main extends Application {
                                 //System.out.println(destId);
                             }
                         }
-
-                        //getting x and y of the line if there is no branches
-                        double x=0,y=0;
-                        String points="";
-                        if(getPIndexByName(lineElement, "Points")!=-1)
-                            points = lineElement.getElementsByTagName("P").item(getPIndexByName(lineElement, "Points")).getTextContent();
-                        //to check if the string has y coordinations
-                        boolean yFlag=false;
-                        if(points.length()>0) {
-                            String pointInfo="";
-                            for(int k=1;k<points.length();k++){
-                                if(points.charAt(k)==',')
-                                    break;
-                                else
-                                    pointInfo+=points.charAt(k);
-                            }
-                            x=Double.parseDouble(pointInfo);
-
-                            for(int k=0;k<points.length();k++){
-                                if(points.charAt(k)==';') yFlag=true;
-                            }
-                            if(yFlag){
-                                int index=-1;
-                                String yString = "";
-                                for(int k=points.length()-2;k>=0;k--){
-                                    if(points.charAt(k)==' ') {
-                                        index=k+1;
-                                        break;
-                                    }
-                                }
-                                for(int k=index;k<points.length()-1;k++)  yString+=points.charAt(k);
-                                y=Double.parseDouble(yString);
-                            }
-                        }
-
-                        Arrow arrow=new Arrow(srcId,srcPlace,x);
                         arrow.addDest(destId,y);
                         connections.add(arrow);
                     }
 
+                    //in case of branches
+                    else{
+                        //System.out.println(branchList.getLength());
+                        for (int j = 0; j < branchList.getLength(); j++) {
+                            Node branchNode = branchList.item(j);
+                            if (branchNode.getNodeType() == Node.ELEMENT_NODE) {
+                                Element branchElement = (Element) branchNode;
+                                int destIdBranch=0;
+                                double yBranch=0;
+                                for (int k = 0; k < branchElement.getElementsByTagName("P").getLength(); k++) {
+                                    if (branchElement.getElementsByTagName("P").item(k).getAttributes().item(0).getTextContent().equals("Dst")) {
+                                        String dstBranch=(branchElement.getElementsByTagName("P").item(k).getTextContent());
+                                        String dstIdInfo="";
+                                        for(int f=0;f<dstBranch.length();f++){
+                                            if(dstBranch.charAt(f)=='#')
+                                                break;
+                                            else
+                                                dstIdInfo+=dstBranch.charAt(f);
+                                        }
+                                        destIdBranch = Integer.parseInt(dstIdInfo);
+                                        //System.out.println(destIdBranch+" "+yBranch);
+                                        arrow.addDest(destIdBranch,yBranch);
+                                        connections.add(arrow);
+                                    }
+                                    else if(branchElement.getElementsByTagName("P").item(k).getAttributes().item(0).getTextContent().equals("Points")){
+                                        String pointsBranch=(branchElement.getElementsByTagName("P").item(k).getTextContent());
+                                        String yBranchString="";
+                                        int idx2=-1;
+                                        for(int f=pointsBranch.length()-2;f>=0;f--){
+                                            if(pointsBranch.charAt(f)==' ') idx2=f+1;
+                                        }
+                                        for(int f=idx2;f<pointsBranch.length()-1;f++)
+                                            yBranchString+=pointsBranch.charAt(f);
+                                        yBranch=Double.parseDouble(yBranchString);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
