@@ -9,10 +9,20 @@
     -fx-text-alignment:left;
     -fx-font-size:5;
 }
-
+#Constant{
+    -fx-border-color: #006E90;
+    -fx-border-width: 2px;
+    -fx-background-color:white;
+    -fx-border-radius : 8;
+    -fx-alignment:center;
+    -fx-font-size:12;
+}
+#sign{
+ -fx-font-size:13;
+}
 #LabelName{
    -fx-font-size:10;
-    -fx-text-alignment: center;
+   -fx-text-alignment: center;
 }
 
 Line{

@@ -4,7 +4,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
@@ -23,7 +22,6 @@ public class Main extends Application {
     static private List<Block> blocks = new ArrayList<Block>(); // for the blocks
     static private List<Arrow> connections = new ArrayList<Arrow>(); // for the connections
     static private Group root = new Group();
-
     @Override
     public void start(Stage stage) throws IOException, ParserConfigurationException, SAXException {
         Scene scene = new Scene(root, 1500, 790);  // setting the width and height of the window
@@ -45,7 +43,7 @@ public class Main extends Application {
 
     public static void mdlParsing() throws IOException, ParserConfigurationException, SAXException {
 
-        File file = new File("Example.mdl");
+        File file = new File("untitled.mdl");
         FileInputStream input = new FileInputStream(file);
         StringBuilder mdlFile = new StringBuilder();
         int q;
@@ -121,7 +119,7 @@ public class Main extends Application {
 
                     // this part extract the number of input and output ports and the flag is used to
                     int NumInputPorts = 1, NumOutputPorts = 1;
-                    if (inputs_ports_position_flag) {
+
                         String ports = blockElement.getElementsByTagName("P").item(0).getTextContent();
                         if (ports.length() == 6) {
                             NumInputPorts = ports.charAt(1) - '0';
@@ -130,8 +128,8 @@ public class Main extends Application {
                             NumInputPorts = ports.charAt(1) - '0';
                             NumOutputPorts = 0;
                         }
-                    }
-                    
+
+
                     // extracting the inputs if the BlockType is ADD
                      String inputs = ""; // for Add class ( signs )
                     if(BlockType.equals("Sum")){
@@ -150,7 +148,7 @@ public class Main extends Application {
                         }
                     }
 
-                    String value = ""; // for constant class ( value )
+                    String value = "1"; // for constant class ( value )
 
                     Block b = switch (BlockType) {
                         case "Saturate" ->

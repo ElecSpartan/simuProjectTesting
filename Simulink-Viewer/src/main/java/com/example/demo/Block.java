@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class Block {
     private int ID;
@@ -104,6 +105,10 @@ public class Block {
         return lName;
     }
 
+    public void setInputsNum(int inputsNum) {
+        this.inputsNum = inputsNum;
+    }
+
     public void addBlock(Group root) {
         root.getChildren().addAll(container,lName);
     }
@@ -171,24 +176,36 @@ class Scope extends Block {
 }
 
 class Add extends Block {
-    String signs;
-
+    ArrayList<Label>signLabels = new ArrayList<Label>();
     public Add(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror, String inputs) {
         super(ID, name, left, up, right, down, inputsNum, outputsNum, mirror);
-        this.signs = inputs;
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < signs.length(); i++) {
-            sb.append(signs.charAt(i));
-            if (i != signs.length() - 1)
-                sb.append('\n');
+        double y = 0;
+        double amount = 24;
+        if(inputs.length()==0) {
+            StringBuilder inputsBuilder = new StringBuilder(inputs);
+            for (int i = 0; i < inputsNum; i++)
+                inputsBuilder.append('+');
+            inputs = inputsBuilder.toString();
         }
-        signs = sb.toString();
-        super.getContainer().setText(signs);
-    }
 
+        for (int i = 0; i < inputs.length(); i++) {
+            Label l = new Label(String.valueOf(inputs.charAt(i)));
+            l.setId("sign");
+            l.setMinWidth(40);
+            if (inputs.charAt(i) == '+')
+                l.setLayoutX(left + 3);
+            else
+                l.setLayoutX(left + 5);
+
+            l.setLayoutY(up + y);
+            y += (amount / inputsNum);
+            signLabels.add(l);
+        }
+    }
     @Override
     public void addBlock(Group root) {
         super.addBlock(root);
+        for (Label signLabel : signLabels) root.getChildren().add(signLabel);
     }
 }
 
@@ -197,6 +214,12 @@ class Constant extends Block {
 
     public Constant(int ID, String name, double left, double up, double right, double down, int inputsNum, int outputsNum, boolean mirror, String value) {
         super(ID, name, left, up, right, down, inputsNum, outputsNum, mirror);
+        super.getContainer().setId("Constant");
+        super.getContainer().setText(value);
         this.value = value;
+    }
+    @Override
+    public void addBlock(Group root) {
+        super.addBlock(root);
     }
 }
